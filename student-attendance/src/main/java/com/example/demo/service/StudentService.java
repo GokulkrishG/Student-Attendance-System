@@ -37,10 +37,10 @@ public class StudentService {
         return repo.save(existing);
     }
 
-    public void deleteStudent(int id) {
-        if (!repo.existsById(id)) {
-            throw new ResourceNotFoundException("Student ID not found: " + id);
-        }
-        repo.deleteById(id);
+    public Student deleteStudent(int id) {
+         Student student= repo.findById(id)
+                        .orElseThrow(()-> new ResourceNotFoundException("Id was not Found" +id));
+         repo.deleteById(id);
+         return student;
     }
 }
