@@ -35,10 +35,10 @@ public class SubjectService {
         return repo.save(existing);
     }
 
-    public void deleteSubject(int id) {
-        if (!repo.existsById(id)) {
-            throw new ResourceNotFoundException("Subject ID not found: " + id);
-        }
-        repo.deleteById(id);
+    public Subject deleteSubject(int id) {
+        Subject subject = repo.findById(id)
+                        .orElseThrow(()-> new ResourceNotFoundException("Id was not Found" +id));
+         repo.deleteById(id);
+         return subject;
     }
 }
